@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Day 7 - DOM & Events</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Task 1 -->
+  <h1 id="main-heading">Hello!</h1>
+  <p id="main-para">Welcome to JavaScript DOM</p>
+  <button id="change-text">Click Me</button>
+
+  <hr>
+
+  <!-- Task 2 -->
+  <h2>Personal Welcome</h2>
+  <input type="text" id="name-input" placeholder="Enter your name">
+  <button id="submit-name">Submit</button>
+  <p id="welcome-message"></p>
+
+  <hr>
+
+  <!-- Task 3 -->
+  <h2>Background Color</h2>
+  <button id="change-bg">Change Background</button>
+
+  <hr>
+
+  <!-- Task 4 -->
+  <h2>To-Do List</h2>
+  <input type="text" id="task-input" placeholder="Enter task">
+  <button id="add-task">Add</button>
+  <ul id="task-list"></ul>
+
+  <!-- JavaScript Code -->
+  <script>
+    // Task 1: Change heading and paragraph
+    document.getElementById("change-text").addEventListener("click", function () {
+      document.getElementById("main-heading").textContent = "Heading Changed!";
+      document.querySelector("#main-para").textContent = "Paragraph Updated!";
+    });
+
+    // Task 2: Show welcome message
+    document.getElementById("submit-name").addEventListener("click", function () {
+      const name = document.getElementById("name-input").value;
+      document.getElementById("welcome-message").textContent = `Welcome, ${name}! `;
+    });
+
+    // Task 3: Change background color
+    document.getElementById("change-bg").addEventListener("click", function () {
+      const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+      document.body.style.backgroundColor = randomColor;
+    });
+
+    // Task 4: To-Do List with delete
+    document.getElementById("add-task").addEventListener("click", function () {
+      const task = document.getElementById("task-input").value;
+      if (task.trim() === "") return;
+
+      const li = document.createElement("li");
+      li.textContent = task;
+
+      const delBtn = document.createElement("button");
+      delBtn.textContent = "Delete";
+      delBtn.style.marginLeft = "10px";
+      delBtn.addEventListener("click", function () {
+        li.remove();
+      });
+
+      li.appendChild(delBtn);
+      document.getElementById("task-list").appendChild(li);
+      document.getElementById("task-input").value = "";
+    });
+  </script>
+
+</body>
+</html>
